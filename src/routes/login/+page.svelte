@@ -25,7 +25,7 @@
 			if (authData.token) {
 				addToast('success', 'Logged in successfully!');
 				spinner = false;
-				goto('/app');
+				goto('/');
 			}
 		} catch (err) {
 			console.log(err);
@@ -33,6 +33,10 @@
 	}
 
 	let spinner = $state(false);
+
+	function togglePassword() {
+		togglePasswordStatus = !togglePasswordStatus;
+	}
 </script>
 
 <PageWrapper title="Login" {pb}>

@@ -86,9 +86,9 @@
 	let lineChart: Chart | undefined = $state();
 
 	onMount(async () => {
-		if (!pb.authStore.isValid) {
-			goto('/login');
-		}
+		// if (!pb.authStore.isValid) {
+		// 	goto('/login');
+		// }
 
 		if (pb.authStore.isValid) {
 			dbRecords = await pb.collection('towel').getFullList({

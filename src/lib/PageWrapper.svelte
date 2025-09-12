@@ -4,6 +4,8 @@
 	import type Client from 'pocketbase';
 	import type { Snippet } from 'svelte';
 	import MaterialSymbolsClose from './assets/svg/MaterialSymbolsClose.svelte';
+	import MaterialSymbolsLogin from './assets/svg/MaterialSymbolsLogin.svelte';
+	import MaterialSymbolsLogout from './assets/svg/MaterialSymbolsLogout.svelte';
 
 	let { pb, children, title }: { pb: Client; children: Snippet; title: string } = $props();
 
@@ -41,7 +43,9 @@
 					<div class="drawer-side">
 						<label for="side-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
 
-						<ul class="menu bg-base-200 text-base-content min-h-full w-80 p-4">
+						<ul
+							class="menu bg-base-200 text-base-content grid min-h-full w-80 grid-rows-[auto_1fr_auto] p-4"
+						>
 							<div class="flex items-center justify-end">
 								<button
 									class="btn btn-ghost"
@@ -53,45 +57,85 @@
 									}}><MaterialSymbolsClose class="size-5" /></button
 								>
 							</div>
-							<li>
-								<a
-									href="/towelie"
-									class="text-base-content flex w-full gap-4 py-4 text-lg font-semibold"
-									><svg
-										xmlns="http://www.w3.org/2000/svg"
-										width="1em"
-										height="1em"
-										class="lucide-lab:towel-rack size-[1.3em] opacity-50"
-										viewBox="0 0 24 24"
-										><path
-											fill="none"
-											stroke="currentColor"
-											stroke-linecap="round"
-											stroke-linejoin="round"
-											stroke-width="2"
-											d="M8 6H2m4-4h12a2 2 0 0 1 2 2v18H8V4a2 2 0 0 0-4 0v15h4M22 6h-2M8 18h12"
-										/></svg
-									>Towelie</a
-								>
-							</li>
-							<li>
-								<a
-									href="/nosey"
-									class="text-base-content flex w-full gap-4 py-4 text-lg font-semibold"
-								>
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										width="1em"
-										height="1em"
-										class="material-symbols:health-and-safety-outline size-[1.3em] opacity-50"
-										viewBox="0 0 24 24"
-										><path
-											fill="currentColor"
-											d="M10.5 15.5h3V13H16v-3h-2.5V7.5h-3V10H8v3h2.5zM12 22q-3.475-.875-5.738-3.988T4 11.1V5l8-3l8 3v6.1q0 3.8-2.262 6.913T12 22m0-2.1q2.6-.825 4.3-3.3t1.7-5.5V6.375l-6-2.25l-6 2.25V11.1q0 3.025 1.7 5.5t4.3 3.3m0-7.9"
-										/></svg
-									>Nosey</a
-								>
-							</li>
+							<ul>
+								<li>
+									<a
+										href="/towelie"
+										class="text-base-content flex w-full gap-4 py-4 text-lg font-semibold"
+										><svg
+											xmlns="http://www.w3.org/2000/svg"
+											width="1em"
+											height="1em"
+											class="lucide-lab:towel-rack size-[1.3em] opacity-50"
+											viewBox="0 0 24 24"
+											><path
+												fill="none"
+												stroke="currentColor"
+												stroke-linecap="round"
+												stroke-linejoin="round"
+												stroke-width="2"
+												d="M8 6H2m4-4h12a2 2 0 0 1 2 2v18H8V4a2 2 0 0 0-4 0v15h4M22 6h-2M8 18h12"
+											/></svg
+										>Towelie</a
+									>
+								</li>
+								<li>
+									<a
+										href="/nosey"
+										class="text-base-content flex w-full gap-4 py-4 text-lg font-semibold"
+									>
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											width="1em"
+											height="1em"
+											class="material-symbols:health-and-safety-outline size-[1.3em] opacity-50"
+											viewBox="0 0 24 24"
+											><path
+												fill="currentColor"
+												d="M10.5 15.5h3V13H16v-3h-2.5V7.5h-3V10H8v3h2.5zM12 22q-3.475-.875-5.738-3.988T4 11.1V5l8-3l8 3v6.1q0 3.8-2.262 6.913T12 22m0-2.1q2.6-.825 4.3-3.3t1.7-5.5V6.375l-6-2.25l-6 2.25V11.1q0 3.025 1.7 5.5t4.3 3.3m0-7.9"
+											/></svg
+										>Nosey</a
+									>
+								</li>
+							</ul>
+							<ul>
+								{#if pb.authStore.isValid}
+									<li>
+										<a
+											href="/logout"
+											class="text-base-content flex w-full gap-4 py-4 text-lg font-semibold"
+											><MaterialSymbolsLogout class="size-[1.3em]" />Logout</a
+										>
+									</li>
+								{/if}
+								{#if !pb.authStore.isValid}
+									<li>
+										<a
+											href="/login"
+											class="text-base-content flex w-full gap-4 py-4 text-lg font-semibold"
+											><MaterialSymbolsLogin class="size-[1.3em]" />Login</a
+										>
+									</li>
+									<li>
+										<a
+											href="/register"
+											class="text-base-content flex w-full gap-4 py-4 text-lg font-semibold"
+											><svg
+												xmlns="http://www.w3.org/2000/svg"
+												width="32"
+												height="32"
+												class="material-symbols:signature size-[1.3em]"
+												viewBox="0 0 24 24"
+												><path
+													fill="currentColor"
+													d="M14.075 11.725q1.825-1.35 2.85-2.962T17.95 5.55q0-.8-.262-1.175T16.975 4Q15.8 4 14.9 5.988t-.9 4.487q0 .35.013.663t.062.587M3 21v-2h2v2zm4 0v-2h2v2zm4 0v-2h2v2zm4 0v-2h2v2zm4 0v-2h2v2zM3.4 17L2 15.6L3.6 14L2 12.4L3.4 11L5 12.6L6.6 11L8 12.4L6.4 14L8 15.6L6.6 17L5 15.4zm12.05-1q-.75 0-1.375-.288T13 14.776q-.625.35-1.287.625t-1.363.55l-.7-1.875q.7-.25 1.338-.537t1.237-.613q-.125-.55-.187-1.2t-.063-1.4q0-3.6 1.425-5.962T16.975 2q1.3 0 2.125.963t.825 2.687q0 2.15-1.362 4.25t-3.788 3.775q.175.175.363.263t.387.087q.65 0 1.513-.825t1.562-2.175l1.825.85q-.175.425-.275 1.025t.025 1.05q.25-.125.588-.425t.687-.75L23.025 14q-.65.9-1.5 1.45T19.95 16q-.525 0-.937-.312t-.688-.963q-.7.625-1.425.95T15.45 16"
+												/></svg
+											>
+											Register</a
+										>
+									</li>
+								{/if}
+							</ul>
 						</ul>
 					</div>
 				</div>

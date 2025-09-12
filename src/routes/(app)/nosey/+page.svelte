@@ -18,10 +18,6 @@
 	let singleDay: SprayDB[] | undefined = $state([]);
 
 	onMount(async () => {
-		if (!pb.authStore.isValid) {
-			goto('/login');
-		}
-
 		if (pb.authStore.isValid) {
 			results = await pb.collection('spray').getFullList({
 				sort: '-created'
@@ -62,8 +58,16 @@
 		return {
 			view: 'dayGridMonth',
 			events: [...times],
+
 			selectBackgroundColor: 'red',
 			eventBackgroundColor: '#4a4a7d',
+			titleFormat: (date) => {
+				const month = dayjs(date).get('month');
+				if (month === 8) {
+					return dayjs(date).format('MMMM YY');
+				}
+				return dayjs(date).format('MMMM YYYY');
+			},
 			dateClick: async (info) => {
 				singleDay = results?.filter((day) => {
 					return dayjs(day.time).get('date') == dayjs(info.date).get('date');
@@ -106,7 +110,7 @@
 <dialog bind:this={singleDayModal} class="modal">
 	<div class="modal-box">
 		{#if singleDay && singleDay.length > 0}
-			{@const theDay = dayjs(singleDay[0].time).format('DD MMM YYYY')}
+			{@const theDay = dayjs(singleDay[0].time).format('D MMM YYYY')}
 			<h3 class="text-lg font-bold">{theDay}</h3>
 			<div class="py-4">
 				<ul class="list-disc">
@@ -132,6 +136,10 @@
 
 <style>
 	:global {
+		.ec.ec-day-grid {
+			max-width: 95vw;
+		}
+
 		.ec-title {
 			font-size: 1.5rem;
 			font-weight: 700 !important;
