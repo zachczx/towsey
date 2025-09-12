@@ -235,17 +235,17 @@
 								class="flex min-h-20 cursor-pointer items-center gap-4 py-8 text-2xl font-bold"
 								onclick={() => modal.showModal()}
 								>{#if status === 'green'}
-									<div class="h-6 w-6 rounded-full bg-lime-400"></div>
-									Squeaky Clean
+									<div class="hidden h-6 w-6 rounded-full bg-lime-400 lg:flex"></div>
+									<span class="text-lime-400">Squeaky Clean</span>
 								{:else if status === 'yellow'}
-									<div class="h-6 w-6 rounded-full bg-yellow-500"></div>
-									Still Fresh
+									<div class="hidden h-6 w-6 rounded-full bg-yellow-500 lg:flex"></div>
+									<span class="text-yellow-500">Still Fresh</span>
 								{:else if status === 'orange'}
-									<div class="h-6 w-6 rounded-full bg-orange-400"></div>
-									Kinda Funky
+									<div class="hidden h-6 w-6 rounded-full bg-orange-400 lg:flex"></div>
+									<span class="text-orange-400">Kinda Funky</span>
 								{:else}
-									<div class="h-6 w-6 rounded-full bg-red-700"></div>
-									Wash Me!
+									<div class="hidden h-5 w-5 rounded-full bg-red-700 lg:flex"></div>
+									<span class="text-red-700">Wash Me!</span>
 								{/if}
 							</button>
 						{/key}
@@ -266,14 +266,12 @@
 				</div>
 			</div>
 
-			{#if records && records.length > 0}
-				<div class="border-base-content/5 bg-base-200/50 w-full rounded-lg border p-4 shadow">
-					<h2 class="text-md text-center">Gaps for Past Washes</h2>
-					<div>
-						<canvas bind:this={lineChartEl}></canvas>
-					</div>
+			<div class="border-base-content/5 bg-base-200/50 w-full rounded-lg border p-4 shadow">
+				<h2 class="text-md text-center">Gaps for Past Washes</h2>
+				<div>
+					<canvas bind:this={lineChartEl}></canvas>
 				</div>
-			{/if}
+			</div>
 
 			<div
 				class="border-base-content/5 bg-base-200/50 grid w-full grid-cols-2 content-center gap-4 rounded-lg border shadow"
