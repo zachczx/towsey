@@ -18,61 +18,6 @@
 	<div class="navbar border-b-base-300/50 bg-neutral text-neutral-content h-14 border-b p-0.5 px-2">
 		<div class="navbar-start">
 			<div class="dropdown">
-				<!-- <div tabindex="0" role="button" class="btn btn-ghost  lg:hidden">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						class="h-5 w-5"
-						fill="none"
-						viewBox="0 0 24 24"
-						stroke="currentColor"
-					>
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M4 6h16M4 12h8m-8 6h16"
-						/>
-					</svg>
-				</div>
-				<ul
-					tabindex="-1"
-					class="menu dropdown-content bg-base-100 rounded-box sidebar-height z-1 mt-3 w-52 p-2 shadow"
-				>
-					<li>
-						<a href="/towelie" class="text-base-content flex w-full gap-4 py-4 text-lg"
-							><svg
-								xmlns="http://www.w3.org/2000/svg"
-								width="1em"
-								height="1em"
-								class="lucide-lab:towel-rack size-[1.3em] opacity-50"
-								viewBox="0 0 24 24"
-								><path
-									fill="none"
-									stroke="currentColor"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									stroke-width="2"
-									d="M8 6H2m4-4h12a2 2 0 0 1 2 2v18H8V4a2 2 0 0 0-4 0v15h4M22 6h-2M8 18h12"
-								/></svg
-							>Towelie</a
-						>
-					</li>
-					<li>
-						<a href="/nosey" class="text-base-content flex w-full gap-4 py-4 text-lg">
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								width="1em"
-								height="1em"
-								class="material-symbols:health-and-safety-outline size-[1.3em] opacity-50"
-								viewBox="0 0 24 24"
-								><path
-									fill="currentColor"
-									d="M10.5 15.5h3V13H16v-3h-2.5V7.5h-3V10H8v3h2.5zM12 22q-3.475-.875-5.738-3.988T4 11.1V5l8-3l8 3v6.1q0 3.8-2.262 6.913T12 22m0-2.1q2.6-.825 4.3-3.3t1.7-5.5V6.375l-6-2.25l-6 2.25V11.1q0 3.025 1.7 5.5t4.3 3.3m0-7.9"
-								/></svg
-							>Nosey</a
-						>
-					</li>
-				</ul> -->
 				<div class="drawer">
 					<input id="side-drawer" type="checkbox" class="drawer-toggle" bind:this={drawerToggle} />
 					<div class="drawer-content">
@@ -194,9 +139,3 @@
 		{@render children?.()}
 	</div>
 </div>
-
-<style>
-	.sidebar-height {
-		height: calc(100vh - 3.3rem);
-	}
-</style>
