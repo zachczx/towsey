@@ -18,10 +18,9 @@
 	<div class="navbar border-b-base-300/50 bg-neutral text-neutral-content h-14 border-b p-0.5 px-2">
 		<div class="navbar-start">
 			<div class="dropdown">
-				<div class="drawer">
+				<div class="drawer lg:hidden">
 					<input id="side-drawer" type="checkbox" class="drawer-toggle" bind:this={drawerToggle} />
 					<div class="drawer-content">
-						<!-- Page content here -->
 						<label for="side-drawer" class="btn btn-ghost drawer-button"
 							><svg
 								xmlns="http://www.w3.org/2000/svg"
@@ -123,9 +122,9 @@
 				</li>
 			</ul>
 		</div>
-		<div class="navbar-end hidden gap-4 text-sm lg:flex">
+		<div class="navbar-end hidden text-sm lg:flex">
 			{#if pb.authStore.isValid}
-				{pb.authStore.record?.email}<a href="/logout" class="btn btn-sm btn-outline">Logout</a>
+				{pb.authStore.record?.email}<a href="/logout" class="btn btn-sm btn-outline ms-4">Logout</a>
 			{:else}
 				<a href="/register" class="underline">Register</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a
 					href="/login"
