@@ -266,12 +266,14 @@
 				</div>
 			</div>
 
-			<div class="border-base-content/5 bg-base-200/50 w-full rounded-lg border p-4 shadow">
-				<h2 class="text-md text-center">Gaps for Past Washes</h2>
-				<div>
-					<canvas bind:this={lineChartEl}></canvas>
+			{#if records && records.length > 0}
+				<div class="border-base-content/5 bg-base-200/50 w-full rounded-lg border p-4 shadow">
+					<h2 class="text-md text-center">Gaps for Past Washes</h2>
+					<div>
+						<canvas bind:this={lineChartEl}></canvas>
+					</div>
 				</div>
-			</div>
+			{/if}
 
 			<div
 				class="border-base-content/5 bg-base-200/50 grid w-full grid-cols-2 content-center gap-4 rounded-lg border shadow"
