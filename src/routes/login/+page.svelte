@@ -21,7 +21,6 @@
 
 		try {
 			const authData = await pb.collection('users').authWithPassword(cleanEmail, cleanPassword);
-			console.log(authData);
 			if (authData.token) {
 				addToast('success', 'Logged in successfully!');
 				spinner = false;

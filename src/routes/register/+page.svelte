@@ -26,15 +26,12 @@
 			};
 
 			const record = await pb.collection('users').create(data);
-
-			console.log(record.id);
 		} catch (err) {
 			console.log(err);
 		}
 
 		try {
 			const authData = await pb.collection('users').authWithPassword(email, password);
-			console.log(authData);
 			if (authData.token) {
 				spinner = false;
 				goto('/app');

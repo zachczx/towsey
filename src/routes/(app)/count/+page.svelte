@@ -79,12 +79,10 @@
 		pauseTarget = min * 60 + sec;
 		clearInterval(timerInterval);
 		started = false;
-		console.log('Pause Target: ', pauseTarget);
 	}
 
 	function resume() {
 		totalSec = pauseTarget;
-		console.log('Resume Target: ', totalSec);
 		started = true;
 
 		tick();
@@ -192,10 +190,8 @@
 					}
 
 					if (started) {
-						console.log("Let's pause!");
 						pause();
 					} else {
-						console.log("Let's resume!");
 						resume();
 					}
 				}}
