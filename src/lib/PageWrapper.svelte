@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
+	import { SafeArea } from '@capacitor-community/safe-area';
 
 	import type Client from 'pocketbase';
 	import type { Snippet } from 'svelte';
@@ -10,6 +11,17 @@
 	let { pb, children, title }: { pb: Client; children: Snippet; title: string } = $props();
 
 	let drawerToggle = $state() as HTMLInputElement;
+
+	SafeArea.enable({
+		config: {
+			customColorsForSystemBars: true,
+			statusBarColor: '#00000000', // transparent
+			statusBarContent: 'light',
+			navigationBarColor: '#00000000', // transparent
+			navigationBarContent: 'light',
+			offset: 0
+		}
+	});
 </script>
 
 <svelte:head>
@@ -17,7 +29,10 @@
 </svelte:head>
 
 <div class="grid min-h-dvh w-full grid-rows-[auto_1fr] content-start justify-items-center">
-	<div class="navbar border-b-base-300/50 bg-neutral text-neutral-content h-14 border-b p-0.5 px-2">
+	<div
+		id="safe-area"
+		class="navbar border-b-base-300/50 bg-neutral text-neutral-content items-end border-b"
+	>
 		<div class="navbar-start">
 			<div class="dropdown">
 				<div class="drawer lg:hidden">
@@ -60,6 +75,24 @@
 							<ul>
 								<li>
 									<a
+										href="/"
+										class="text-base-content flex w-full gap-4 py-4 text-lg font-semibold"
+									>
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											width="1em"
+											height="1em"
+											class="material-symbols:home-outline size-[1.3em] opacity-50"
+											viewBox="0 0 24 24"
+											><path
+												fill="currentColor"
+												d="M6 19h3v-6h6v6h3v-9l-6-4.5L6 10zm-2 2V9l8-6l8 6v12h-7v-6h-2v6zm8-8.75"
+											/></svg
+										>Home</a
+									>
+								</li>
+								<li>
+									<a
 										href="/towelie"
 										class="text-base-content flex w-full gap-4 py-4 text-lg font-semibold"
 										><svg
@@ -97,6 +130,24 @@
 										>Nosey</a
 									>
 								</li>
+								<li>
+									<a
+										href="/count"
+										class="text-base-content flex w-full gap-4 py-4 text-lg font-semibold"
+									>
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											width="32"
+											height="32"
+											class="material-symbols:timer-outline size-[1.3em] opacity-50"
+											viewBox="0 0 24 24"
+											><path
+												fill="currentColor"
+												d="M9 3V1h6v2zm2 11h2V8h-2zm1 8q-1.85 0-3.488-.712T5.65 19.35t-1.937-2.863T3 13t.713-3.488T5.65 6.65t2.863-1.937T12 4q1.55 0 2.975.5t2.675 1.45l1.4-1.4l1.4 1.4l-1.4 1.4Q20 8.6 20.5 10.025T21 13q0 1.85-.713 3.488T18.35 19.35t-2.863 1.938T12 22m0-2q2.9 0 4.95-2.05T19 13t-2.05-4.95T12 6T7.05 8.05T5 13t2.05 4.95T12 20m0-7"
+											/></svg
+										>Count</a
+									>
+								</li>
 							</ul>
 							<ul>
 								{#if pb.authStore.isValid}
@@ -104,7 +155,7 @@
 										<a
 											href="/logout"
 											class="text-base-content flex w-full gap-4 py-4 text-lg font-semibold"
-											><MaterialSymbolsLogout class="size-[1.3em]" />Logout</a
+											><MaterialSymbolsLogout class="size-[1.3em] opacity-50" />Logout</a
 										>
 									</li>
 								{/if}
@@ -113,7 +164,7 @@
 										<a
 											href="/login"
 											class="text-base-content flex w-full gap-4 py-4 text-lg font-semibold"
-											><MaterialSymbolsLogin class="size-[1.3em]" />Login</a
+											><MaterialSymbolsLogin class="size-[1.3em] opacity-50" />Login</a
 										>
 									</li>
 									<li>
@@ -124,7 +175,7 @@
 												xmlns="http://www.w3.org/2000/svg"
 												width="32"
 												height="32"
-												class="material-symbols:signature size-[1.3em]"
+												class="material-symbols:signature size-[1.3em] opacity-50"
 												viewBox="0 0 24 24"
 												><path
 													fill="currentColor"
@@ -164,6 +215,16 @@
 						]}>Nosey</a
 					>
 				</li>
+				<li>
+					<a
+						href="/count"
+						class={[
+							page.route.id?.includes('count') &&
+								'border-b-neutral-content rounded-none border-b-2 font-bold',
+							!page.route.id?.includes('count') && 'hover:bg-white/20'
+						]}>Count</a
+					>
+				</li>
 			</ul>
 		</div>
 		<div class="navbar-end hidden text-sm lg:flex">
@@ -182,3 +243,9 @@
 		{@render children?.()}
 	</div>
 </div>
+
+<style>
+	#safe-area {
+		padding-top: calc(var(--safe-area-inset-top) + 0.5rem) !important;
+	}
+</style>
