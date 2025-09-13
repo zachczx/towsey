@@ -1,25 +1,30 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
 	import PageWrapper from '$lib/PageWrapper.svelte';
 	import { pb } from '$lib/pb';
-	import { onMount } from 'svelte';
-
-	onMount(() => {
-		if (!pb.authStore.isValid) {
-			goto('/login');
-		}
-	});
 </script>
 
 <PageWrapper title="Towsey" {pb}>
-	<main class="-mt-12 grid h-full content-center justify-items-center max-lg:gap-24 lg:grid-cols-2">
-		<a href="/towelie" class="grid gap-2 text-center">
+	<main class="grid h-full content-center justify-items-center max-lg:grid-rows-3 lg:grid-cols-2">
+		<a
+			href="/towelie"
+			class="focus:border-primary/30 active:border-primary/30 hover:bg-primary grid w-full content-center gap-2 rounded-xl text-center focus:border active:border"
+		>
 			<h2 class="font-towelie-logo hover:text-primary text-center text-7xl xl:text-9xl">Towelie</h2>
 			<div>Track towel washes</div>
 		</a>
-		<a href="/nosey" class="grid gap-2 text-center">
+		<a
+			href="/nosey"
+			class="focus:border-primary/30 active:border-primary/30 hover:bg-primary grid w-full content-center gap-2 rounded-xl text-center focus:border active:border"
+		>
 			<h2 class="font-space hover:text-primary text-7xl font-bold xl:text-9xl">Nosey</h2>
 			<div>Track nasal sprays</div>
+		</a>
+		<a
+			href="/count"
+			class="focus:border-primary/30 active:border-primary/30 hover:bg-primary grid w-full content-center gap-2 rounded-xl text-center focus:border active:border"
+		>
+			<h2 class="hover:text-primary text-7xl font-black tracking-tighter xl:text-9xl">Count</h2>
+			<div>Countdown for video watching</div>
 		</a>
 	</main>
 </PageWrapper>
